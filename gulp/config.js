@@ -27,6 +27,6 @@ module.exports = {
 		dest: 'build'
 	},
 	ghPages: {
-		src: 'build/**'
+		src: 'build'
 	}
 };

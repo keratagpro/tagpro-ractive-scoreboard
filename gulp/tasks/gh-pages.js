@@ -1,8 +1,10 @@
 var gulp = require('gulp');
-var deploy = require('gulp-gh-pages');
+var ghpages = require('gh-pages');
+var gitConfig = require('git-config');
 var config = require('../config').ghPages;
 
-gulp.task('gh-pages', function() {
-	return gulp.src(config.src)
-		.pipe(deploy({ cacheDir: '.tmpRepo', push: false }));
+gulp.task('gh-pages', ['build'], function() {
+	ghpages.publish(config.src, {
+		user: gitConfig.sync('.git/config').user
+	});
 });
