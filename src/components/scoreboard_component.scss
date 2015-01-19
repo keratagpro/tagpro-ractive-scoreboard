@@ -3,6 +3,7 @@
 	right: 0;
 	bottom: 0;
 	z-index: 2;
+	overflow-y: auto;
 
 	width: 400px;
 
@@ -97,7 +98,7 @@
 		}
 	}
 
-	> table {
+	table {
 		margin-bottom: 0;
 		border-spacing: 0;
 		width: 100%;

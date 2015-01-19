@@ -1,4 +1,4 @@
-<div id="kera-scoreboard" style="background-color: {{options.backgroundColor}}" intro-outro="fly:{x:0,y:500}">
+<div id="kera-scoreboard" style="background-color: {{options.backgroundColor}}; max-height: {{options.maxHeight}};" intro-outro="fly:{x:0,y:500}">
 	<div class="tools">
 		<a href="#" class="settings" title="Settings" on-click="toggle('options.showOptions')">
 			<span class="icon icon-gear-white">&nbsp;</span>
@@ -65,13 +65,15 @@
 	{{#if options.showStatistics}}
 	<h3>Team Statistics</h3>
 	<table class="team-statistics">
-	{{#selectedStatistics:key}}
-		<tr class="{{key}}">
-			<td class="label">{{label}}</td>
-			<td class="red">{{time ? formatTime(redTeamStats[key]) : redTeamStats[key]}}</td>
-			<td class="blue">{{time ? formatTime(blueTeamStats[key]) : blueTeamStats[key]}}</td>
-		</tr>
-	{{/selectedStatistics}}
+		<tbody>
+			{{#selectedStatistics:key}}
+				<tr class="{{key}}">
+					<td class="label">{{label}}</td>
+					<td class="red">{{time ? formatTime(redTeamStats[key]) : redTeamStats[key]}}</td>
+					<td class="blue">{{time ? formatTime(blueTeamStats[key]) : blueTeamStats[key]}}</td>
+				</tr>
+			{{/selectedStatistics}}
+		</tbody>
 	</table>
 	{{/if}}
 </div>

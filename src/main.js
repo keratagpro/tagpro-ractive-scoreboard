@@ -58,7 +58,22 @@ var ractive = new Ractive({
 });
 
 ractive.on('Options.saveOptions', function() {
-	var changed = getChanges(defaultOptions, this.get('options')) || null;
+	var stats = this.get('statistics');
+
+	var key;
+	var selectedStats = [];
+	for (key in stats) {
+		if (stats[key].selected) {
+			selectedStats.push(key);
+		}
+	}
+
+	var options = this.get('options');
+	var changed = getChanges(defaultOptions, options) || null;
+
+	if (defaultOptions.selectedStatisticsKeys.join(',') !== selectedStats.join(',')) {
+		changed.selectedStatisticsKeys = selectedStats;
+	}
 
 	if (changed && changed.showOptions) {
 		delete changed.showOptions; // Don't store the Options window setting
@@ -75,7 +90,7 @@ ractive.on('Options.resetOptions', function() {
 
 addPowerupCounts(ractive);
 
-window.ractive = ractive;
+window.keraScoreboard = ractive;
 
 var style = document.createElement('style');
 style.type = "text/css";

@@ -12,6 +12,7 @@ module.exports = {
 	showStatistics: true,
 	selectedStatisticsKeys: ['s-hold', 'score', 'powerups'],
 	backgroundColor: '#000',
+	maxHeight: '50%',
 	teamNames: {
 		red: tagpro.teamNames.redTeamName,
 		blue: tagpro.teamNames.blueTeamName

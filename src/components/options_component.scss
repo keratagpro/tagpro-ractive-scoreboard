@@ -2,6 +2,8 @@
 	border: 3px solid #333;
 	border-radius: 3px;
 	max-width: 600px;
+	max-height: 90%;
+	overflow: auto;
 
 	color: #333;
 	background-color: #eee;
@@ -85,6 +87,10 @@
 		position: absolute;
 		right: 0;
 		top: 0;
+	}
+
+	label.checkbox {
+		display: inline-block;
 	}
 
 	// label {
