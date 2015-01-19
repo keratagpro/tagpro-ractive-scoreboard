@@ -25,5 +25,8 @@ module.exports = {
 	example: {
 		src: 'example/**',
 		dest: 'build'
+	},
+	ghPages: {
+		src: 'build/**'
 	}
 };
