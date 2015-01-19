@@ -11,6 +11,7 @@ var helpers = require('./main-helpers');
 var getPlayersByTeam = helpers.getPlayersByTeam;
 var getTeamStats = helpers.getTeamStats;
 var addPowerupCounts = helpers.addPowerupCounts;
+var selectedStatistics = helpers.selectedStatistics;
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
 Ractive.decorators.movable = require('./decorators/movable');
@@ -33,10 +34,18 @@ var ractive = new Ractive({
 		},
 		blueTeamStats: function() {
 			return getTeamStats.call(this, this.get('bluePlayers'));
-		}
+		},
+		selectedStatistics: selectedStatistics
 	},
 	reloadOptions: function() {
 		this.set('options', $.extend(true, {}, defaultOptions, storage.getJson('options')));
+
+		// Reset Statistics
+		this.set('statistics.*.selected', false);
+		var selected = this.get('options.selectedStatisticsKeys');
+		selected.forEach(function(key) {
+			this.set('statistics.' + key + '.selected', true);
+		}.bind(this));
 	},
 	components: {
 		'Options': require('./components/options_component'),
@@ -105,7 +114,7 @@ var OptionsComponent = Ractive.extend({
 
 module.exports = OptionsComponent;
 },{"./checkbox_component":2,"./options_component.ract":5,"./textbox_component":10,"ractive":26}],5:[function(require,module,exports){
-module.exports = {"v":1,"t":[{"t":7,"e":"div","a":{"id":"kera-scoreboard-options"},"t0":{"n":"fly","a":[{"x":0,"y":-500,"opacity":1}]},"o":{"n":"movable","a":"document.body"},"f":[{"t":7,"e":"a","a":{"href":"#","class":"close","title":"Close Options"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showOptions\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-small icon-close"}}]}," ",{"t":7,"e":"h3","a":{"class":"drag-handle"},"f":[{"t":7,"e":"span","a":{"class":"icon icon-score"}}," TagPro Scoreboard Options (",{"t":7,"e":"a","a":{"href":"https://github.com/keratagpro/tagpro-scoreboard"},"f":["github"]},")"]}," ",{"t":7,"e":"div","a":{"class":"options-content"},"f":[{"t":7,"e":"form","a":{"class":"pure-form"},"f":[{"t":7,"e":"Checkbox","a":{"class":"pure-checkbox","label":"Show Scoreboard","value":[{"t":2,"r":"options.showScoreboard"}]}}," ",{"t":7,"e":"fieldset","f":[{"t":7,"e":"legend","f":["Team info"]}," ",{"t":7,"e":"Checkbox","a":{"label":"Score","value":[{"t":2,"r":"options.showScore"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Team names","value":[{"t":2,"r":"options.showTeams"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Players","value":[{"t":2,"r":"options.showPlayers"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Statistics","value":[{"t":2,"r":"options.showStatistics"}]}}]}," ",{"t":7,"e":"fieldset","f":[{"t":7,"e":"legend","f":["Player info"]}," ",{"t":7,"e":"Checkbox","a":{"label":"Powerups","value":[{"t":2,"r":"options.showPowerups"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Authentication","value":[{"t":2,"r":"options.showAuth"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Flair","value":[{"t":2,"r":"options.showFlair"}]}}]}," ",{"t":7,"e":"fieldset","a":{"class":"pure-form-stacked"},"f":[{"t":7,"e":"legend","f":["Advanced"]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"id":"name-red","label":"Red Team Name","value":[{"t":2,"r":"options.teamNames.red"}]}}," ",{"t":7,"e":"Textbox","a":{"id":"name-blue","label":"Blue Team Name","value":[{"t":2,"r":"options.teamNames.blue"}]}}]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"id":"score-red","label":"Red Team Score","value":[{"t":2,"r":"options.previousScores.red"}]}}," ",{"t":7,"e":"Textbox","a":{"id":"score-blue","label":"Blue Team Score","value":[{"t":2,"r":"options.previousScores.blue"}]}}]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"label":"Scoreboard Background Color","value":[{"t":2,"r":"backgroundColor"}]}}]}]}," ",{"t":7,"e":"a","a":{"href":"#"},"v":{"click":"saveOptions"},"f":["Save Locally"]}," ",{"t":7,"e":"a","a":{"href":"#"},"v":{"click":"resetOptions"},"f":["Reset"]}]}]}]}]}
+module.exports = {"v":1,"t":[{"t":7,"e":"div","a":{"id":"kera-scoreboard-options"},"t0":{"n":"fly","a":[{"x":0,"y":-500,"opacity":1}]},"o":{"n":"movable","a":"document.body"},"f":[{"t":7,"e":"a","a":{"href":"#","class":"close","title":"Close Options"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showOptions\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-small icon-close"}}]}," ",{"t":7,"e":"h3","a":{"class":"drag-handle"},"f":[{"t":7,"e":"span","a":{"class":"icon icon-score"}}," TagPro Scoreboard Options (",{"t":7,"e":"a","a":{"href":"https://github.com/keratagpro/tagpro-scoreboard"},"f":["github"]},")"]}," ",{"t":7,"e":"div","a":{"class":"options-content"},"f":[{"t":7,"e":"form","a":{"class":"pure-form"},"f":[{"t":7,"e":"Checkbox","a":{"class":"pure-checkbox","label":"Show Scoreboard","value":[{"t":2,"r":"options.showScoreboard"}]}}," ",{"t":7,"e":"fieldset","f":[{"t":7,"e":"legend","f":["Team info"]}," ",{"t":7,"e":"Checkbox","a":{"label":"Score","value":[{"t":2,"r":"options.showScore"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Team names","value":[{"t":2,"r":"options.showTeams"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Players","value":[{"t":2,"r":"options.showPlayers"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Statistics","value":[{"t":2,"r":"options.showStatistics"}]}}]}," ",{"t":7,"e":"fieldset","f":[{"t":7,"e":"legend","f":["Player info"]}," ",{"t":7,"e":"Checkbox","a":{"label":"Powerups","value":[{"t":2,"r":"options.showPowerups"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Authentication","value":[{"t":2,"r":"options.showAuth"}]}}," ",{"t":7,"e":"Checkbox","a":{"label":"Flair","value":[{"t":2,"r":"options.showFlair"}]}}]}," ",{"t":7,"e":"fieldset","f":[{"t":7,"e":"legend","f":["Statistics"]}," ",{"t":4,"r":"statistics","i":"key","f":[{"t":7,"e":"Checkbox","a":{"label":[{"t":2,"r":"label"}],"value":[{"t":2,"r":".selected"}]}}]}]}," ",{"t":7,"e":"fieldset","a":{"class":"pure-form-stacked"},"f":[{"t":7,"e":"legend","f":["Other"]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"id":"name-red","label":"Red Team Name","value":[{"t":2,"r":"options.teamNames.red"}]}}," ",{"t":7,"e":"Textbox","a":{"id":"name-blue","label":"Blue Team Name","value":[{"t":2,"r":"options.teamNames.blue"}]}}]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"id":"score-red","label":"Red Team Score","value":[{"t":2,"r":"options.previousScores.red"}]}}," ",{"t":7,"e":"Textbox","a":{"id":"score-blue","label":"Blue Team Score","value":[{"t":2,"r":"options.previousScores.blue"}]}}]}," ",{"t":7,"e":"div","a":{"class":"pure-g"},"f":[{"t":7,"e":"Textbox","a":{"label":"Scoreboard Background Color","value":[{"t":2,"r":"options.backgroundColor"}]}}]}]}," ",{"t":7,"e":"a","a":{"href":"#"},"v":{"click":"saveOptions"},"f":["Save Locally"]}," ",{"t":7,"e":"a","a":{"href":"#"},"v":{"click":"resetOptions"},"f":["Reset"]}]}]}]}]}
 },{}],6:[function(require,module,exports){
 
 var Ractive = require('ractive');
@@ -149,7 +158,7 @@ var ScoreboardComponent = Ractive.extend({
 
 module.exports = ScoreboardComponent;
 },{"./player_component":6,"./scoreboard_component.ract":9,"ractive":26}],9:[function(require,module,exports){
-module.exports = {"v":1,"t":[{"t":7,"e":"div","a":{"id":"kera-scoreboard","style":["background-color: ",{"t":2,"r":"backgroundColor"}]},"t0":{"n":"fly","a":[{"x":0,"y":500}]},"f":[{"t":7,"e":"div","a":{"class":"tools"},"f":[{"t":7,"e":"a","a":{"href":"#","class":"settings","title":"Settings"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showOptions\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-gear-white"},"f":["&nbsp;"]}]}," ",{"t":7,"e":"a","a":{"href":"#","class":"close","title":"Close Scoreboard"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showScoreboard\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-close-white"},"f":["&nbsp;"]}]}]}," ",{"t":4,"n":50,"x":{"r":["options.showScore","options.showTeams"],"s":"_0||_1"},"f":[{"t":4,"n":50,"x":{"r":["options.previousScores.red","options.previousScores.blue"],"s":"_0||_1"},"f":[{"t":7,"e":"div","a":{"class":"score-previous"},"f":[{"t":2,"x":{"r":["options.previousScores.red","score.r"],"s":"(parseInt(_0)||0)+_1"}}," - ",{"t":2,"x":{"r":["options.previousScores.blue","score.b"],"s":"(parseInt(_0)||0)+_1"}}]}]}," ",{"t":7,"e":"table","f":[{"t":7,"e":"thead","f":[{"t":4,"n":50,"r":"options.showScore","f":[{"t":7,"e":"tr","a":{"class":"score-row"},"f":[{"t":7,"e":"th","a":{"class":"red"},"f":[{"t":7,"e":"span","a":{"class":"sprite-tiles sprite-large","style":["background-position: ",{"t":2,"x":{"r":["getSprite"],"s":"_0(\"redball\")"}},";"]}}," ",{"t":7,"e":"span","a":{"class":"score"},"f":[{"t":2,"r":"score.r"}]}]}," ",{"t":7,"e":"th","a":{"class":"separator"},"f":["-"]}," ",{"t":7,"e":"th","a":{"class":"blue"},"f":[{"t":7,"e":"span","a":{"class":"score"},"f":[{"t":2,"r":"score.b"}]}," ",{"t":7,"e":"span","a":{"class":"sprite-tiles sprite-large","style":["background-position: ",{"t":2,"x":{"r":["getSprite"],"s":"_0(\"blueball\")"}},";"]}}]}]}]}," ",{"t":4,"n":50,"r":"options.showTeams","f":[{"t":7,"e":"tr","a":{"class":"team-name-row"},"f":[{"t":7,"e":"td","a":{"class":"team red"},"f":[{"t":2,"r":"options.teamNames.red"}]}," ",{"t":7,"e":"td","a":{"class":"separator"},"f":["vs"]}," ",{"t":7,"e":"td","a":{"class":"team blue"},"f":[{"t":2,"r":"options.teamNames.blue"}]}]}]}]}]}]}," ",{"t":7,"e":"table","f":[{"t":7,"e":"tbody","f":[{"t":4,"n":50,"r":"options.showPlayers","f":[{"t":7,"e":"tr","a":{"class":"player-row"},"f":[{"t":7,"e":"td","a":{"class":"player red"},"f":[{"t":4,"r":"redPlayers","i":"id","f":[{"t":7,"e":"p","f":[{"t":7,"e":"Player"}]}]}]}," ",{"t":7,"e":"td","a":{"class":"separator"}}," ",{"t":7,"e":"td","a":{"class":"player blue"},"f":[{"t":4,"r":"bluePlayers","i":"id","f":[{"t":7,"e":"p","f":[{"t":7,"e":"Player"}]}]}]}]}]}]}]}," ",{"t":4,"n":50,"r":"options.showStatistics","f":[{"t":7,"e":"h3","f":["Team Statistics"]}," ",{"t":7,"e":"table","a":{"class":"team-statistics"},"f":[{"t":4,"r":"options.selectedStats","i":"key","f":[{"t":7,"e":"tr","a":{"class":[{"t":2,"r":"key"}]},"f":[{"t":7,"e":"td","a":{"class":"label"},"f":[{"t":2,"r":"label"}]}," ",{"t":7,"e":"td","a":{"class":"red"},"f":[{"t":2,"x":{"r":["time","formatTime","key","redTeamStats"],"s":"_0?_1(_3[_2]):_3[_2]"}}]}," ",{"t":7,"e":"td","a":{"class":"blue"},"f":[{"t":2,"x":{"r":["time","formatTime","key","blueTeamStats"],"s":"_0?_1(_3[_2]):_3[_2]"}}]}]}]}]}]}]}]}
+module.exports = {"v":1,"t":[{"t":7,"e":"div","a":{"id":"kera-scoreboard","style":["background-color: ",{"t":2,"r":"options.backgroundColor"}]},"t0":{"n":"fly","a":[{"x":0,"y":500}]},"f":[{"t":7,"e":"div","a":{"class":"tools"},"f":[{"t":7,"e":"a","a":{"href":"#","class":"settings","title":"Settings"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showOptions\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-gear-white"},"f":["&nbsp;"]}]}," ",{"t":7,"e":"a","a":{"href":"#","class":"close","title":"Close Scoreboard"},"v":{"click":{"m":"toggle","a":{"r":[],"s":"[\"options.showScoreboard\"]"}}},"f":[{"t":7,"e":"span","a":{"class":"icon icon-close-white"},"f":["&nbsp;"]}]}]}," ",{"t":4,"n":50,"x":{"r":["options.showScore","options.showTeams"],"s":"_0||_1"},"f":[{"t":4,"n":50,"x":{"r":["options.previousScores.red","options.previousScores.blue"],"s":"_0||_1"},"f":[{"t":7,"e":"div","a":{"class":"score-previous"},"f":[{"t":2,"x":{"r":["options.previousScores.red","score.r"],"s":"(parseInt(_0)||0)+_1"}}," - ",{"t":2,"x":{"r":["options.previousScores.blue","score.b"],"s":"(parseInt(_0)||0)+_1"}}]}]}," ",{"t":7,"e":"table","f":[{"t":7,"e":"thead","f":[{"t":4,"n":50,"r":"options.showScore","f":[{"t":7,"e":"tr","a":{"class":"score-row"},"f":[{"t":7,"e":"th","a":{"class":"red"},"f":[{"t":7,"e":"span","a":{"class":"sprite-tiles sprite-large","style":["background-position: ",{"t":2,"x":{"r":["getSprite"],"s":"_0(\"redball\")"}},";"]}}," ",{"t":7,"e":"span","a":{"class":"score"},"f":[{"t":2,"r":"score.r"}]}]}," ",{"t":7,"e":"th","a":{"class":"separator"},"f":["-"]}," ",{"t":7,"e":"th","a":{"class":"blue"},"f":[{"t":7,"e":"span","a":{"class":"score"},"f":[{"t":2,"r":"score.b"}]}," ",{"t":7,"e":"span","a":{"class":"sprite-tiles sprite-large","style":["background-position: ",{"t":2,"x":{"r":["getSprite"],"s":"_0(\"blueball\")"}},";"]}}]}]}]}," ",{"t":4,"n":50,"r":"options.showTeams","f":[{"t":7,"e":"tr","a":{"class":"team-name-row"},"f":[{"t":7,"e":"td","a":{"class":"team red"},"f":[{"t":2,"r":"options.teamNames.red"}]}," ",{"t":7,"e":"td","a":{"class":"separator"},"f":["vs"]}," ",{"t":7,"e":"td","a":{"class":"team blue"},"f":[{"t":2,"r":"options.teamNames.blue"}]}]}]}]}]}]}," ",{"t":7,"e":"table","f":[{"t":7,"e":"tbody","f":[{"t":4,"n":50,"r":"options.showPlayers","f":[{"t":7,"e":"tr","a":{"class":"player-row"},"f":[{"t":7,"e":"td","a":{"class":"player red"},"f":[{"t":4,"r":"redPlayers","i":"id","f":[{"t":7,"e":"p","f":[{"t":7,"e":"Player"}]}]}]}," ",{"t":7,"e":"td","a":{"class":"separator"}}," ",{"t":7,"e":"td","a":{"class":"player blue"},"f":[{"t":4,"r":"bluePlayers","i":"id","f":[{"t":7,"e":"p","f":[{"t":7,"e":"Player"}]}]}]}]}]}]}]}," ",{"t":4,"n":50,"r":"options.showStatistics","f":[{"t":7,"e":"h3","f":["Team Statistics"]}," ",{"t":7,"e":"table","a":{"class":"team-statistics"},"f":[{"t":4,"r":"selectedStatistics","i":"key","f":[{"t":7,"e":"tr","a":{"class":[{"t":2,"r":"key"}]},"f":[{"t":7,"e":"td","a":{"class":"label"},"f":[{"t":2,"r":"label"}]}," ",{"t":7,"e":"td","a":{"class":"red"},"f":[{"t":2,"x":{"r":["time","formatTime","key","redTeamStats"],"s":"_0?_1(_3[_2]):_3[_2]"}}]}," ",{"t":7,"e":"td","a":{"class":"blue"},"f":[{"t":2,"x":{"r":["time","formatTime","key","blueTeamStats"],"s":"_0?_1(_3[_2]):_3[_2]"}}]}]}]}]}]}]}]}
 },{}],10:[function(require,module,exports){
 var Ractive = require('ractive');
 
@@ -196,12 +205,15 @@ var storage = require('./util/storage');
 var mouseMoveTimeout;
 var defaultOptions = require('./main-options');
 
+var helpers = require('./main-helpers');
+var statistics = helpers.statistics;
+
 module.exports = {
 	defaultOptions: defaultOptions,
 	mouseMoved: false,
 	players: tagpro.players,
 	score: tagpro.score,
-	backgroundColor: '#000',
+	statistics: statistics,
 	getSprite: function(sprite) {
 		var width = 40;
 		var height = 40;
@@ -235,7 +247,7 @@ module.exports = {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./main-options":15,"./util/storage":20}],14:[function(require,module,exports){
+},{"./main-helpers":14,"./main-options":15,"./util/storage":20}],14:[function(require,module,exports){
 var filter = require('./util/filter');
 
 var powerups = {
@@ -317,7 +329,7 @@ var tagpro = (typeof window !== "undefined" ? window.tagpro : typeof global !== 
 
 module.exports = {
 	showOptions: false,
-	showScoreboard: false,
+	showScoreboard: true,
 	showScore: true,
 	showTeams: true,
 	showPlayers: true,
@@ -325,11 +337,8 @@ module.exports = {
 	showPowerups: true,
 	showAuth: true,
 	showStatistics: true,
-	selectedStats: {
-		's-hold': { label: 'Hold', time: true },
-		'score': { label: 'Score' },
-		'powerups': { label: 'Powerups' }
-	},
+	selectedStatisticsKeys: ['s-hold', 'score', 'powerups'],
+	backgroundColor: '#000',
 	teamNames: {
 		red: tagpro.teamNames.redTeamName,
 		blue: tagpro.teamNames.blueTeamName
