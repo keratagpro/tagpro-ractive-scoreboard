@@ -27,8 +27,15 @@
 				<Checkbox label="Flair" value="{{options.showFlair}}" />
 			</fieldset>
 
+			<fieldset>
+				<legend>Statistics</legend>
+				{{#statistics:key}}
+					<Checkbox label="{{label}}" value="{{.selected}}" />
+				{{/statistics}}
+			</fieldset>
+
 			<fieldset class="pure-form-stacked">
-				<legend>Advanced</legend>
+				<legend>Other</legend>
 
 				<div class="pure-g">
 					<Textbox id="name-red" label="Red Team Name" value="{{options.teamNames.red}}" />
@@ -41,9 +48,8 @@
 				</div>
 
 				<div class="pure-g">
-					<Textbox label="Scoreboard Background Color" value="{{backgroundColor}}" />
+					<Textbox label="Scoreboard Background Color" value="{{options.backgroundColor}}" />
 				</div>
-
 			</fieldset>
 
 			<a href="#" on-click="saveOptions">Save Locally</a>

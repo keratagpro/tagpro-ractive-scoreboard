@@ -6,12 +6,14 @@ var storage = require('./util/storage');
 var mouseMoveTimeout;
 var defaultOptions = require('./main-options');
 
+var helpers = require('./main-helpers');
+
 module.exports = {
 	defaultOptions: defaultOptions,
 	mouseMoved: false,
 	players: tagpro.players,
 	score: tagpro.score,
-	backgroundColor: '#000',
+	statistics: helpers.statistics,
 	getSprite: function(sprite) {
 		var width = 40;
 		var height = 40;

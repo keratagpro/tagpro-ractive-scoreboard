@@ -10,11 +10,8 @@ module.exports = {
 	showPowerups: true,
 	showAuth: true,
 	showStatistics: true,
-	selectedStats: {
-		's-hold': { label: 'Hold', time: true },
-		'score': { label: 'Score' },
-		'powerups': { label: 'Powerups' }
-	},
+	selectedStatisticsKeys: ['s-hold', 'score', 'powerups'],
+	backgroundColor: '#000',
 	teamNames: {
 		red: tagpro.teamNames.redTeamName,
 		blue: tagpro.teamNames.blueTeamName

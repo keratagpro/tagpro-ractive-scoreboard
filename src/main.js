@@ -10,6 +10,7 @@ var helpers = require('./main-helpers');
 var getPlayersByTeam = helpers.getPlayersByTeam;
 var getTeamStats = helpers.getTeamStats;
 var addPowerupCounts = helpers.addPowerupCounts;
+var selectedStatistics = helpers.selectedStatistics;
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
 Ractive.decorators.movable = require('./decorators/movable');
@@ -32,10 +33,18 @@ var ractive = new Ractive({
 		},
 		blueTeamStats: function() {
 			return getTeamStats.call(this, this.get('bluePlayers'));
-		}
+		},
+		selectedStatistics: selectedStatistics
 	},
 	reloadOptions: function() {
 		this.set('options', $.extend(true, {}, defaultOptions, storage.getJson('options')));
+
+		// Reset Statistics
+		this.set('statistics.*.selected', false);
+		var selected = this.get('options.selectedStatisticsKeys');
+		selected.forEach(function(key) {
+			this.set('statistics.' + key + '.selected', true);
+		}.bind(this));
 	},
 	components: {
 		'Options': require('./components/options_component'),

@@ -1,10 +1,11 @@
+var $ = require('jquery');
 var filter = require('./util/filter');
 
-var powerups = {
-	grip: { label: 'Grip' },
-	speed: { label: 'Speed' },
-	bomb: { label: 'Rolling Bomb' },
-	tagpro: { label: 'Tagpro' }
+var powerupCounts = {
+	gripCount: { label: 'Grip', id: 'grip' },
+	speedCount: { label: 'Speed', id: 'speed' },
+	bombCount: { label: 'Rolling Bomb', id: 'bomb' },
+	tagproCount: { label: 'Tagpro', id: 'tagpro' }
 }
 
 var summables = {
@@ -22,10 +23,29 @@ var summables = {
 	'degree': { label: 'Degree' }
 };
 
+var statistics = $.extend(true, {}, summables, powerupCounts, {
+	powerups: { label: 'Powerups' }
+});
+
+function selectedStatistics() {
+	var stats = this.get('statistics');
+
+	var key;
+	var map = {};
+
+	for (key in stats) {
+		if (stats[key].selected) {
+			map[key] = stats[key];
+		}
+	}
+
+	return map
+}
+
 function getTeamStats(players) {
 	var stats = Object.keys(summables);
-	var powerupCounts = Object.keys(powerups).map(function(item) { return item + 'Count'; });
-	Array.prototype.push.apply(stats, powerupCounts);
+	var powerups = Object.keys(powerupCounts);
+	Array.prototype.push.apply(stats, powerups);
 
 	var map = {};
 
@@ -39,7 +59,7 @@ function getTeamStats(players) {
 		}, 0);
 	});
 
-	map.powerups = powerupCounts.reduce(function(sum, key) {
+	map.powerups = powerups.reduce(function(sum, key) {
 		return sum + map[key];
 	}, 0);
 
@@ -55,7 +75,7 @@ function getPlayersByTeam(players, team) {
 }
 
 function addPowerupCounts(ractive) {
-	var keys = Object.keys(powerups);
+	var keys = Object.keys(powerupCounts).map(function(item) { return powerupCounts[item].id });
 
 	var keypaths = keys.map(function(item) {
 		return 'players.*.' + item;
@@ -69,6 +89,8 @@ function addPowerupCounts(ractive) {
 }
 
 module.exports = {
+	statistics: statistics,
+	selectedStatistics: selectedStatistics,
 	getTeamStats: getTeamStats,
 	getPlayersByTeam: getPlayersByTeam,
 	addPowerupCounts: addPowerupCounts
