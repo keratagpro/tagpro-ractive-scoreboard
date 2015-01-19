@@ -1,7 +1,9 @@
 Kera's Tagpro Scoreboard Userscript
 ====================
 
-How to develop further:
+Example: http://keratagpro.github.io/tagpro-scoreboard
+
+## Development
 
 1. Install NodeJS
 2. Install Gulp Globally
