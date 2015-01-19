@@ -3,7 +3,7 @@
 // @version       0.2
 // @description   Player/Team/Powerup/Score overview for TagPro, mainly for streamers.
 // @namespace     http://keratagpro.github.io/tagpro-scoreboard
-// @icon          http://keratagpro.github.io/tagpro-scoreboard/images/score-green.png
+// @icon          http://keratagpro.github.io/tagpro-scoreboard/images/score.png
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @include       http://maptest.newcompte.fr:*
