@@ -1,0 +1,52 @@
+{
+  "name": "gulp-starter",
+  "version": "0.1.1",
+  "description": "Gulp starter with common tasks and scenarios",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/greypants/gulp-starter.git"
+  },
+  "browser": {
+    "ractive": "ractive/ractive.runtime.min",
+    "jquery-ui/draggable": "./node_modules/jquery-ui/draggable.js",
+    "jquery-ui/resizable": "./node_modules/jquery-ui/resizable.js"
+  },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "tagpro": "global:tagpro"
+  },
+  "browserify": {
+    "transform": [
+      "brfs",
+      "browserify-shim"
+    ]
+  },
+  "devDependencies": {
+    "brfs": "^1.2.0",
+    "browser-sync": "~1.9.0",
+    "browserify": "^8.1.1",
+    "browserify-shim": "^3.8.2",
+    "css-sprite": "^0.9.0",
+    "gh-pages": "^0.2.0",
+    "gulp": "~3.8.10",
+    "gulp-add-src": "^0.2.0",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-cached": "^1.0.2",
+    "gulp-concat": "^2.4.3",
+    "gulp-minify-css": "^0.3.12",
+    "gulp-notify": "~2.1.0",
+    "gulp-ractive": "0.0.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.1",
+    "gulp-sass": "^1.3.1",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "~3.0.2",
+    "pretty-hrtime": "~1.0.0",
+    "vinyl-source-stream": "~1.0.0",
+    "watchify": "~2.2.1"
+  },
+  "dependencies": {
+    "jquery-ui": "^1.10.5",
+    "ractive": "^0.6.1"
+  }
+}

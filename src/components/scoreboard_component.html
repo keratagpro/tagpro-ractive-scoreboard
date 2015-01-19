@@ -1,0 +1,77 @@
+<div id="kera-scoreboard" style="background-color: {{backgroundColor}}" intro-outro="fly:{x:0,y:500}">
+	<div class="tools">
+		<a href="#" class="settings" title="Settings" on-click="toggle('options.showOptions')">
+			<span class="icon icon-gear-white">&nbsp;</span>
+		</a>
+		<a href="#" class="close" title="Close Scoreboard" on-click="toggle('options.showScoreboard')">
+			<span class="icon icon-close-white">&nbsp;</span>
+		</a>
+	</div>
+
+	{{#if (options.showScore || options.showTeams)}}
+
+	{{#if (options.previousScores.red || options.previousScores.blue)}}
+		<div class="score-previous">
+			{{(parseInt(options.previousScores.red) || 0) + score.r }} -
+			{{(parseInt(options.previousScores.blue) || 0) + score.b }}
+		</div>
+	{{/if}}
+
+	<table>
+			<thead>
+				{{#if options.showScore}}
+				<tr class="score-row">
+					<th class="red">
+						<span class="sprite-tiles sprite-large" style="background-position: {{getSprite('redball')}};"></span>
+						<span class="score">{{score.r}}</span>
+					</th>
+					<th class="separator">-</th>
+					<th class="blue">
+						<span class="score">{{score.b}}</span>
+						<span class="sprite-tiles sprite-large" style="background-position: {{getSprite('blueball')}};"></span>
+					</th>
+				</tr>
+				{{/if}}
+				{{#if options.showTeams}}
+				<tr class="team-name-row">
+					<td class="team red">{{options.teamNames.red}}</td>
+					<td class="separator">vs</th>
+					<td class="team blue">{{options.teamNames.blue}}</td>
+				</tr>
+				{{/if}}
+			</thead>
+	</table>
+	{{/if}}
+	<table>
+		<tbody>
+			{{#if options.showPlayers}}
+			<tr class="player-row">
+				<td class="player red">
+					{{#redPlayers:id}}
+						<p><Player /></p>
+					{{/redPlayers}}
+				</td>
+				<td class="separator"></td>
+				<td class="player blue">
+					{{#bluePlayers:id}}
+						<p><Player /></p>
+					{{/bluePlayers}}
+				</td>
+			</tr>
+			{{/if}}
+		</tbody>
+	</table>
+
+	{{#if options.showStatistics}}
+	<h3>Team Statistics</h3>
+	<table class="team-statistics">
+	{{#options.selectedStats:key}}
+		<tr class="{{key}}">
+			<td class="label">{{label}}</td>
+			<td class="red">{{time ? formatTime(redTeamStats[key]) : redTeamStats[key]}}</td>
+			<td class="blue">{{time ? formatTime(blueTeamStats[key]) : blueTeamStats[key]}}</td>
+		</tr>
+	{{/options.selectedStats}}
+	</table>
+	{{/if}}
+</div>

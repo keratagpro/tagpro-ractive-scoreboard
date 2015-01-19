@@ -1,0 +1,89 @@
+$include-html-classes: false;
+$include-print-styles: false;
+
+$table-border-size: 0;
+$table-bg: transparent;
+$table-even-row-bg: transparent;
+
+$table-head-bg: transparent;
+$table-head-font-weight: normal;
+$table-head-font-color: #fff;
+
+$table-row-font-color: #fff;
+$table-row-padding: 3px 2px;
+
+@import "../scss/foundation/components/tables";
+
+.kera-scoreboard {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	max-width: 400px;
+	max-height: 400px;
+
+	border-radius: 5px;
+	border: 3px solid #ccc;
+	background-color: black;
+	
+	> table {
+		@include table;
+
+		margin-bottom: 0;
+		border-spacing: 0;
+		width: 100%;
+
+		thead {
+			background-color: transparent;
+
+			th.separator, td.separator {
+				padding-left: 0;
+				padding-right: 0;
+				text-align: center;
+			}
+
+			th.red, th.blue {
+				width: 50%;
+			}
+		}
+
+		.score-row {
+			th, td {
+				font-size: 40px;
+			}
+		}
+
+		.team-name-row {
+			td {
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+		}
+
+		.player-row {
+			p {
+				margin: 5px 0;
+			}
+		}
+
+		.score-row, .team-name-row, .player-row {
+			.red {
+				text-align: right;
+			}
+		}
+
+		.sprite-tiles {
+			background-image: url('/images/tiles.png');
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+		}
+
+		.sprite-flair {
+			background-image: url('/images/flair.png');
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+		}
+	}
+}

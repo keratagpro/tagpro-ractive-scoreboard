@@ -1,0 +1,53 @@
+<div id="kera-scoreboard-options" intro-outro="fly:{x:0,y:-500,opacity:1}" decorator="movable:document.body">
+	<a href="#" class="close" title="Close Options" on-click="toggle('options.showOptions')">
+		<span class="icon icon-small icon-close"></span>
+	</a>
+	<h3 class="drag-handle">
+		<span class="icon icon-score"></span>
+		TagPro Scoreboard Options (<a href="https://github.com/keratagpro/tagpro-scoreboard">github</a>)
+	</h3>
+	<div class="options-content">
+		<form class="pure-form">
+			<Checkbox class="pure-checkbox" label="Show Scoreboard" value="{{options.showScoreboard}}" />
+
+			<fieldset>
+				<legend>Team info</legend>
+
+				<Checkbox label="Score" value="{{options.showScore}}" />
+				<Checkbox label="Team names" value="{{options.showTeams}}" />
+				<Checkbox label="Players" value="{{options.showPlayers}}" />
+				<Checkbox label="Statistics" value="{{options.showStatistics}}" />
+			</fieldset>
+
+			<fieldset>
+				<legend>Player info</legend>
+
+				<Checkbox label="Powerups" value="{{options.showPowerups}}" />
+				<Checkbox label="Authentication" value="{{options.showAuth}}" />
+				<Checkbox label="Flair" value="{{options.showFlair}}" />
+			</fieldset>
+
+			<fieldset class="pure-form-stacked">
+				<legend>Advanced</legend>
+
+				<div class="pure-g">
+					<Textbox id="name-red" label="Red Team Name" value="{{options.teamNames.red}}" />
+					<Textbox id="name-blue" label="Blue Team Name" value="{{options.teamNames.blue}}" />
+				</div>
+
+				<div class="pure-g">
+					<Textbox id="score-red" label="Red Team Score" value="{{options.previousScores.red}}" />
+					<Textbox id="score-blue" label="Blue Team Score" value="{{options.previousScores.blue}}" />
+				</div>
+
+				<div class="pure-g">
+					<Textbox label="Scoreboard Background Color" value="{{backgroundColor}}" />
+				</div>
+
+			</fieldset>
+
+			<a href="#" on-click="saveOptions">Save Locally</a>
+			<a href="#" on-click="resetOptions">Reset</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+#kera-scoreboard {
+	.player-row {
+		.icons {
+			position: absolute;
+			font-size: 0;
+		}
+
+		.dead {
+			color: red !important;
+		}
+
+		.auth {
+			color: #bfff00;
+		}
+
+		.name {
+			padding: 0 3px;
+		}
+
+		.red {
+			.icons {
+				left: 3px;
+			}
+
+			.flair {
+				float: right;
+				margin-left: 4px;
+			}
+		}
+
+		.blue {
+			.icons {
+				right: 3px;
+			}
+
+			.flair {
+				float: left;
+				margin-right: 4px;
+			}
+		}
+	}
+}
