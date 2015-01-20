@@ -30,6 +30,8 @@ var playerDefaults = (function() {
 		auth: false,
 		flag: null,
 		flair: null,
+		team: null,
+		name: 'Some Ball'
 	};
 
 	Object.keys(summables).forEach(function(key) {
@@ -74,6 +76,17 @@ function addPowerupCounts(ractive) {
 		if (val && !old) {
 			ractive.set(keypath + 'Count', (ractive.get(keypath + 'Count') || 0) + 1);
 		}
+	});
+}
+
+function forceRactiveMagicMode(ractive) {
+	var playerIds = Object.keys(ractive.get('players'));
+	var keys = Object.keys(playerDefaults);
+
+	playerIds.forEach(function(player) {
+		keys.forEach(function(key) {
+			ractive.get('players.' + player + '.' + key);
+		});
 	});
 }
 
@@ -132,6 +145,7 @@ function selectedStatistics() {
 module.exports = {
 	addInitialValuesToPlayers: addInitialValuesToPlayers,
 	addPowerupCounts: addPowerupCounts,
+	forceRactiveMagicMode: forceRactiveMagicMode,
 	getPlayersByTeam: getPlayersByTeam,
 	getTeamStats: getTeamStats,
 	injectGlobalCss: injectGlobalCss,

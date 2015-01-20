@@ -49,7 +49,8 @@
 		a {
 			display: inline !important; // NOTE: TagPro style override
 			font-size: inherit !important; // NOTE: TagPro style override
-			color: #333; // NOTE: TagPro style override
+			color: #008000; // NOTE: TagPro style override
+			text-decoration: none;
 
 			&:hover {
 				text-decoration: underline; // NOTE: TagPro style override

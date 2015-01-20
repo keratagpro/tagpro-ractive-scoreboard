@@ -8,11 +8,12 @@ var storage = require('./util/storage');
 require('./util/ractive-transitions-fly');
 
 var helpers = require('./main-helpers');
+var addPowerupCounts = helpers.addPowerupCounts;
+var forceRactiveMagicMode = helpers.forceRactiveMagicMode;
 var getPlayersByTeam = helpers.getPlayersByTeam;
 var getTeamStats = helpers.getTeamStats;
-var addPowerupCounts = helpers.addPowerupCounts;
-var selectedStatistics = helpers.selectedStatistics;
 var injectGlobalCss = helpers.injectGlobalCss;
+var selectedStatistics = helpers.selectedStatistics;
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
 Ractive.decorators.movable = require('./decorators/movable');
@@ -58,6 +59,8 @@ var main = new Ractive({
 		window.addEventListener('mousemove', this.get('mouseMoveHandler').bind(this));
 
 		addPowerupCounts(this);
+
+		forceRactiveMagicMode(this);
 
 		injectGlobalCss(fs.readFileSync(__dirname + '/main.css', 'utf8'));
 	}
