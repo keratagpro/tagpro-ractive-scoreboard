@@ -2,6 +2,7 @@ Kera's Tagpro Scoreboard Userscript
 ====================
 
 Download: http://keratagpro.github.io/tagpro-scoreboard/tagpro-scoreboard.user.js
+
 Example: http://keratagpro.github.io/tagpro-scoreboard
 
 ## Development
