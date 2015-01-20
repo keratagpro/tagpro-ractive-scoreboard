@@ -8,11 +8,19 @@ var defaultOptions = require('./main-options');
 
 var helpers = require('./main-helpers');
 
+var score = tagpro.score || { r: 0, b: 0 };
+tagpro.socket.on('score', function(s) {
+	score.r = s.r;
+	score.b = s.b;
+});
+
+helpers.addInitialValuesToPlayers(tagpro.players);
+
 module.exports = {
 	defaultOptions: defaultOptions,
 	mouseMoved: false,
 	players: tagpro.players,
-	score: tagpro.score,
+	score: score,
 	statistics: helpers.statistics,
 	getSprite: function(sprite) {
 		var width = 40;

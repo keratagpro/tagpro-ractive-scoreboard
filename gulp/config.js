@@ -1,10 +1,14 @@
-var tmp = '.tmp';
+var path = require('path');
+
+var tmp = 'tmp/build';
+var bundleName = 'bundle.js';
+var userscriptName = 'tagpro-scoreboard.user.js';
 
 module.exports = {
 	browserify: {
-		src: './.tmp/index.js',
-		dest: 'build',
-		outputName: 'bundle.js'
+		src: './tmp/build/index.js',
+		dest: tmp,
+		outputName: bundleName
 	},
 	html: {
 		src: 'src/**/*.html',
@@ -14,9 +18,15 @@ module.exports = {
 		src: 'src/**/*.scss',
 		dest: tmp
 	},
-	js: {
-		src: 'src/**/*.js',
+	scripts: {
+		src: ['src/**/*.js'],
 		dest: tmp
+	},
+	dist: {
+		src: path.join('.', tmp, bundleName),
+		header: './src/userscript-header.txt',
+		outputName: userscriptName,
+		dest: './build/'
 	},
 	sprites: {
 		src: 'src/images/*.png',

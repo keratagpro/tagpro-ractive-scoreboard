@@ -23,30 +23,65 @@ var summables = {
 	'degree': { label: 'Degree' }
 };
 
+var playerDefaults = (function() {
+	var def = {
+		dead: false,
+		auth: false,
+		flag: null,
+		flair: null,
+	};
+
+	Object.keys(summables).forEach(function(key) {
+		def[key] = 0;
+	});
+
+	Object.keys(powerupCounts).forEach(function(key) {
+		def[key] = 0;
+		def[powerupCounts[key].id] = false;
+	});
+
+	def.powerups = 0;
+
+	return def;
+})();
+
 var statistics = $.extend(true, {}, summables, powerupCounts, {
 	powerups: { label: 'Powerups' }
 });
 
-function selectedStatistics() {
-	var stats = this.get('statistics');
+function addInitialValuesToPlayers(players) {
+	var playerKeys = Object.keys(tagpro.players);
+	var keys = Object.keys(playerDefaults);
 
-	var key;
-	var map = {};
+	playerKeys.forEach(function(key) {
+		var player = players[key];
 
-	for (key in stats) {
-		if (stats[key].selected) {
-			map[key] = stats[key];
-		}
-	}
-
-	return map
+		keys.forEach(function(key) {
+			player[key] = player[key] || playerDefaults[key];
+		});
+	});
 }
 
-function injectGlobalCss(css) {
-	var style = document.createElement('style');
-	style.type = "text/css";
-	style.innerHTML = css;
-	document.head.appendChild(style);	
+function addPowerupCounts(ractive) {
+	var keys = Object.keys(powerupCounts).map(function(item) { return powerupCounts[item].id });
+
+	var keypaths = keys.map(function(item) {
+		return 'players.*.' + item;
+	}).join(' ');
+
+	ractive.observe(keypaths, function(val, old, keypath) {
+		if (val && !old) {
+			ractive.set(keypath + 'Count', (ractive.get(keypath + 'Count') || 0) + 1);
+		}
+	});
+}
+
+function getPlayersByTeam(players, team) {
+	var players = this.get('players');
+
+	return filter(players, function(item) {
+		return item.team === team;
+	});
 }
 
 function getTeamStats(players) {
@@ -73,33 +108,34 @@ function getTeamStats(players) {
 	return map;
 }
 
-function getPlayersByTeam(players, team) {
-	var players = this.get('players');
-
-	return filter(players, function(item) {
-		return item.team === team;
-	});
+function injectGlobalCss(css) {
+	var style = document.createElement('style');
+	style.type = "text/css";
+	style.innerHTML = css;
+	document.head.appendChild(style);	
 }
 
-function addPowerupCounts(ractive) {
-	var keys = Object.keys(powerupCounts).map(function(item) { return powerupCounts[item].id });
+function selectedStatistics() {
+	var stats = this.get('statistics');
 
-	var keypaths = keys.map(function(item) {
-		return 'players.*.' + item;
-	}).join(' ');
+	var key;
+	var map = {};
 
-	ractive.observe(keypaths, function(val, old, keypath) {
-		if (val && !old) {
-			ractive.set(keypath + 'Count', (ractive.get(keypath + 'Count') || 0) + 1);
+	for (key in stats) {
+		if (stats[key].selected) {
+			map[key] = stats[key];
 		}
-	});
+	}
+
+	return map;
 }
 
 module.exports = {
-	statistics: statistics,
-	selectedStatistics: selectedStatistics,
-	getTeamStats: getTeamStats,
-	getPlayersByTeam: getPlayersByTeam,
+	addInitialValuesToPlayers: addInitialValuesToPlayers,
 	addPowerupCounts: addPowerupCounts,
-	injectGlobalCss: injectGlobalCss
+	getPlayersByTeam: getPlayersByTeam,
+	getTeamStats: getTeamStats,
+	injectGlobalCss: injectGlobalCss,
+	selectedStatistics: selectedStatistics,
+	statistics: statistics
 };

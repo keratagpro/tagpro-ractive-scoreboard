@@ -1,5 +1,6 @@
 window.tagpro = {
 	ready: function(done) { done(); },
+	socket: { on: function() { } },
 	players: {
 		1: {
 			name: 'Some Ball 1',

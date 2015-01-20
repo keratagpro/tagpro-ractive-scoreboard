@@ -1,5 +1,10 @@
 var tagpro = require('tagpro');
 
+var teamNames = tagpro.teamNames || {
+	redTeamName: 'Red',
+	blueTeamName: 'Blue'
+};
+
 module.exports = {
 	showOptions: false,
 	showScoreboard: false,
@@ -14,8 +19,8 @@ module.exports = {
 	backgroundColor: '#000',
 	maxHeight: '50%',
 	teamNames: {
-		red: tagpro.teamNames.redTeamName,
-		blue: tagpro.teamNames.blueTeamName
+		red: teamNames.redTeamName,
+		blue: teamNames.blueTeamName
 	},
 	previousScores: {
 		red: null,

@@ -3,11 +3,12 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var addsrc = require('gulp-add-src');
 var concat = require('gulp-concat');
+var config = require('../config').dist;
 
 gulp.task('dist', ['build'], function() {
-	gulp.src('./build/bundle.js')
+	gulp.src(config.src)
 		.pipe(uglify())
-		.pipe(addsrc.prepend('./src/userscript-header.txt'))
-		.pipe(concat('tagpro-scoreboard.user.js'))
-		.pipe(gulp.dest('./dist/'));
+		.pipe(addsrc.prepend(config.header))
+		.pipe(concat(config.outputName))
+		.pipe(gulp.dest(config.dest));
 });

@@ -1,6 +1,6 @@
-var window = unsafeWindow || window;
-window.tagpro = tagpro || require('tagpro'); // HACK: Stuff to make browserify-shim work.
-window.$ = $ || require('jquery');
+var w = window;
+w.tagpro = tagpro || require('tagpro'); // HACK: Stuff to make browserify-shim work.
+w.$ = $ || require('jquery');
 
 tagpro.ready(function() {
 	$(document.body).append('<div id="kera-scoreboard-container"></div>');

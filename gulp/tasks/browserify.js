@@ -30,7 +30,7 @@ gulp.task('browserify', ['ractive', 'scss', 'scripts', 'copy'], function() {
 
 	if (global.isWatching) {
 		bundler
-			.on('log', util.log.bind(util, 'bundle.js:'))
+			.on('log', util.log.bind(util, config.outputName + ':'))
 			.on('update', rebundle);
 	}
 

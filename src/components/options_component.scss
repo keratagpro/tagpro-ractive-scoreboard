@@ -43,6 +43,18 @@
 		.icon {
 			margin-right: 5px;
 		}
+
+		text-align: left; // NOTE: TagPro style override
+
+		a {
+			display: inline !important; // NOTE: TagPro style override
+			font-size: inherit !important; // NOTE: TagPro style override
+			color: #333; // NOTE: TagPro style override
+
+			&:hover {
+				text-decoration: underline; // NOTE: TagPro style override
+			}
+		}
 	}
 
 	h4 {

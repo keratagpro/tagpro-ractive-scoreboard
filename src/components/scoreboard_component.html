@@ -23,11 +23,11 @@
 				<tr class="score-row">
 					<th class="red">
 						<span class="sprite-tiles sprite-large" style="background-position: {{getSprite('redball')}};"></span>
-						<span class="score">{{score.r}}</span>
+						<span class="score">{{score.r || 0}}</span>
 					</th>
 					<th class="separator">-</th>
 					<th class="blue">
-						<span class="score">{{score.b}}</span>
+						<span class="score">{{score.b || 0}}</span>
 						<span class="sprite-tiles sprite-large" style="background-position: {{getSprite('blueball')}};"></span>
 					</th>
 				</tr>

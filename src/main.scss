@@ -18,11 +18,12 @@
 		bottom: 0;
 		z-index: 3;
 
-		opacity: 100%;
+		opacity: 1;
 		transition: opacity 1s;
 
 		&.hidden {
-			opacity: 0%;
+			opacity: 0;
+			display: inherit !important; // NOTE: TagPro style override
 		}
 
 		.hide {
