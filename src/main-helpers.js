@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var tagpro = require('tagpro');
 var filter = require('./util/filter');
 
 var powerupCounts = {
@@ -6,7 +7,7 @@ var powerupCounts = {
 	speedCount: { label: 'Speed', id: 'speed' },
 	bombCount: { label: 'Rolling Bomb', id: 'bomb' },
 	tagproCount: { label: 'Tagpro', id: 'tagpro' }
-}
+};
 
 var summables = {
 	's-tags': { label: 'Tags' },
@@ -63,7 +64,7 @@ function addInitialValuesToPlayers(players) {
 }
 
 function addPowerupCounts(ractive) {
-	var keys = Object.keys(powerupCounts).map(function(item) { return powerupCounts[item].id });
+	var keys = Object.keys(powerupCounts).map(function(item) { return powerupCounts[item].id; });
 
 	var keypaths = keys.map(function(item) {
 		return 'players.*.' + item;
@@ -77,8 +78,6 @@ function addPowerupCounts(ractive) {
 }
 
 function getPlayersByTeam(players, team) {
-	var players = this.get('players');
-
 	return filter(players, function(item) {
 		return item.team === team;
 	});
@@ -110,7 +109,7 @@ function getTeamStats(players) {
 
 function injectGlobalCss(css) {
 	var style = document.createElement('style');
-	style.type = "text/css";
+	style.type = 'text/css';
 	style.innerHTML = css;
 	document.head.appendChild(style);	
 }

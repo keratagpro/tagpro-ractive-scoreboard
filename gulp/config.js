@@ -1,32 +1,23 @@
 var path = require('path');
 
-var tmp = 'tmp/build';
+var tempPath = 'tmp/src';
+var buildPath = 'build';
 var bundleName = 'bundle.js';
 var userscriptName = 'tagpro-scoreboard.user.js';
+var entryPath = './' + tempPath + '/index.js';
 
 module.exports = {
-	browserify: {
-		src: './tmp/build/index.js',
-		dest: tmp,
-		outputName: bundleName
-	},
 	html: {
 		src: 'src/**/*.html',
-		dest: tmp
+		dest: tempPath
 	},
 	scss: {
 		src: 'src/**/*.scss',
-		dest: tmp
+		dest: tempPath
 	},
 	scripts: {
 		src: ['src/**/*.js'],
-		dest: tmp
-	},
-	dist: {
-		src: path.join('.', tmp, bundleName),
-		header: './src/userscript-header.txt',
-		outputName: userscriptName,
-		dest: './build/'
+		dest: tempPath
 	},
 	sprites: {
 		src: 'src/images/*.png',
@@ -34,9 +25,24 @@ module.exports = {
 	},
 	example: {
 		src: 'example/**',
-		dest: 'build'
+		dest: buildPath
+	},
+	browserify: {
+		src: entryPath,
+		dest: buildPath,
+		outputName: bundleName
+	},
+	browserSync: {
+		src: [buildPath + '/**'],
+		baseDir: buildPath
+	},
+	dist: {
+		src: path.join(buildPath, bundleName),
+		header: './src/userscript-header.txt',
+		outputName: userscriptName,
+		dest: buildPath
 	},
 	ghPages: {
-		src: 'build'
+		src: buildPath
 	}
 };

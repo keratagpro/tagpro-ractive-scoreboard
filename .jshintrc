@@ -17,9 +17,10 @@
     "strict": false,
     "trailing": true,
     "smarttabs": true,
-    "jquery": false,
+    "jquery": true,
     "globalstrict": true,
     "globals": {
-        "System": true
+        "System": true,
+        "tagpro": true
     }
 }

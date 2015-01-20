@@ -4,7 +4,7 @@ var powerups = {
 	speed: { label: 'Speed' },
 	bomb: { label: 'Rolling Bomb' },
 	tagpro: { label: 'Tagpro' }
-}
+};
 
 module.exports = function(ractive) {
 	var keys = Object.keys(powerups);

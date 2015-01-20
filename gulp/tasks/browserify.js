@@ -7,7 +7,7 @@ var source = require('vinyl-source-stream');
 
 var config = require('../config').browserify;
 
-gulp.task('browserify', ['ractive', 'scss', 'scripts', 'copy'], function() {
+gulp.task('browserify', ['ractive', 'scss', 'scripts'], function() {
 	var args = {};
 	if (global.isWatching) {
 		args = watchify.args; // cache, packageCache, fullPaths

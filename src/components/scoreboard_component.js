@@ -11,11 +11,12 @@ var ScoreboardComponent = Ractive.extend({
 			var minutes = parseInt(sec / 60, 10) % 60;
 			var seconds = sec % 60;
 
-			var result = (minutes < 10 ? "0" + minutes : minutes) + ":" +
-				(seconds  < 10 ? "0" + seconds : seconds);
+			var result = (minutes < 10 ? '0' + minutes : minutes) + ':' +
+				(seconds  < 10 ? '0' + seconds : seconds);
 
-			if (hours > 0)
-				result = (hours < 10 ? "0" + hours : hours) + ":" + result;
+			if (hours > 0) {
+				result = (hours < 10 ? '0' + hours : hours) + ':' + result;
+			}
 
 			return result;
 		}

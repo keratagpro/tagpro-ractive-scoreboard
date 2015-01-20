@@ -8,4 +8,4 @@ tagpro.ready(function() {
 	window.keraScoreboard = require('./main');
 
 	console.log('Kera TagPro Scoreboard initialized.');
-})
+});

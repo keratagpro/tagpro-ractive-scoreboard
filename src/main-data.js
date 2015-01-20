@@ -26,19 +26,19 @@ module.exports = {
 		var width = 40;
 		var height = 40;
 		var tile = tagpro.tiles[sprite];
-		var position = (-tile.x * width) + "px " + (-tile.y * height) + "px";
+		var position = (-tile.x * width) + 'px ' + (-tile.y * height) + 'px';
 		return position;
 	},
 	getFlag: function(flag) {
 		var sprite = this.get('getSprite');
-		return sprite(flag == 1 ? 'redflag' : flag == 2 ? 'blueflag' : 'yellowflag');
+		return sprite(flag === 1 ? 'redflag' : flag === 2 ? 'blueflag' : 'yellowflag');
 	},
 	getFlair: function(flair) {
 		var x = flair ? flair.x : 10;
 		var y = flair ? flair.y : 10;
 		var width = 16;
 		var height = 16;
-		var position = (-x * width) + "px " + (-y * height) + "px";
+		var position = (-x * width) + 'px ' + (-y * height) + 'px';
 		return position;
 	},
 	mouseMoveHandler: function(ev) {
