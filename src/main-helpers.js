@@ -42,6 +42,13 @@ function selectedStatistics() {
 	return map
 }
 
+function injectGlobalCss(css) {
+	var style = document.createElement('style');
+	style.type = "text/css";
+	style.innerHTML = css;
+	document.head.appendChild(style);	
+}
+
 function getTeamStats(players) {
 	var stats = Object.keys(summables);
 	var powerups = Object.keys(powerupCounts);
@@ -93,5 +100,6 @@ module.exports = {
 	selectedStatistics: selectedStatistics,
 	getTeamStats: getTeamStats,
 	getPlayersByTeam: getPlayersByTeam,
-	addPowerupCounts: addPowerupCounts
+	addPowerupCounts: addPowerupCounts,
+	injectGlobalCss: injectGlobalCss
 };

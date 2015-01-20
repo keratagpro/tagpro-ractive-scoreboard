@@ -1,5 +1,6 @@
 var fs = require('fs');
 var Ractive = require('ractive');
+var $ = require('jquery');
 
 var defaultOptions = require('./main-options');
 var getChanges = require('./util/getChanges');
@@ -11,13 +12,14 @@ var getPlayersByTeam = helpers.getPlayersByTeam;
 var getTeamStats = helpers.getTeamStats;
 var addPowerupCounts = helpers.addPowerupCounts;
 var selectedStatistics = helpers.selectedStatistics;
+var injectGlobalCss = helpers.injectGlobalCss;
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
 Ractive.decorators.movable = require('./decorators/movable');
 
-var ractive = new Ractive({
+var main = new Ractive({
 	debug: true,
-	el: '#output',
+	el: '#kera-scoreboard-container',
 	template: require('./main.ract'),
 	magic: true,
 	data: require('./main-data'),
@@ -54,10 +56,14 @@ var ractive = new Ractive({
 		this.reloadOptions();
 
 		window.addEventListener('mousemove', this.get('mouseMoveHandler').bind(this));
+
+		addPowerupCounts(this);
+
+		injectGlobalCss(fs.readFileSync(__dirname + '/main.css', 'utf8'));
 	}
 });
 
-ractive.on('Options.saveOptions', function() {
+main.on('Options.saveOptions', function() {
 	var stats = this.get('statistics');
 
 	var key;
@@ -83,16 +89,9 @@ ractive.on('Options.saveOptions', function() {
 	storage.setJson('options', changed);
 });
 
-ractive.on('Options.resetOptions', function() {
+main.on('Options.resetOptions', function() {
 	storage.setItem('options', null);
 	this.reloadOptions();
 });
 
-addPowerupCounts(ractive);
-
-window.keraScoreboard = ractive;
-
-var style = document.createElement('style');
-style.type = "text/css";
-style.innerHTML = fs.readFileSync(__dirname + '/main.css', 'utf8');
-document.head.appendChild(style);
+module.exports = main;

@@ -1,14 +1,12 @@
-<div id="kera-scoreboard-container">
-	{{#if options.showScoreboard}}
-		<Scoreboard />
-	{{/if}} 
+{{#if options.showScoreboard}}
+	<Scoreboard />
+{{/if}} 
 
-	{{#if options.showOptions}}
-		<Options />
-	{{/if}}
+{{#if options.showOptions}}
+	<Options />
+{{/if}}
 
-	<label class="options-toggle {{mouseMoved ? '' : 'hidden'}}">
-		<input type="checkbox" class="hide" checked="{{options.showScoreboard}}" />
-		<span class="icon icon-score-green"></span>
-	</label>
-</div>
+<label class="options-toggle {{mouseMoved ? '' : 'hidden'}}">
+	<input type="checkbox" class="hide" checked="{{options.showScoreboard}}" />
+	<span class="icon icon-score-green"></span>
+</label>

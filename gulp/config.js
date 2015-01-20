@@ -2,7 +2,7 @@ var tmp = '.tmp';
 
 module.exports = {
 	browserify: {
-		src: './.tmp/main.js',
+		src: './.tmp/index.js',
 		dest: 'build',
 		outputName: 'bundle.js'
 	},
