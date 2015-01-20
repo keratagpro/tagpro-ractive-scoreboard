@@ -4,6 +4,7 @@ var tempPath = 'tmp/src';
 var buildPath = 'build';
 var bundleName = 'bundle.js';
 var userscriptName = 'tagpro-scoreboard.user.js';
+var userscriptMetaName = 'tagpro-scoreboard.meta.js';
 var entryPath = './' + tempPath + '/index.js';
 
 module.exports = {
@@ -40,6 +41,7 @@ module.exports = {
 		src: path.join(buildPath, bundleName),
 		header: './src/userscript-header.txt',
 		outputName: userscriptName,
+		metaName: userscriptMetaName,
 		dest: buildPath
 	},
 	ghPages: {

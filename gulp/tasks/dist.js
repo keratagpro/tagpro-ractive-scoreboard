@@ -6,7 +6,11 @@ var concat = require('gulp-concat');
 var config = require('../config').dist;
 
 gulp.task('dist', ['build'], function() {
-	gulp.src(config.src)
+	gulp.src(config.header)
+		.pipe(rename(config.metaName))
+		.pipe(gulp.dest(config.dest));
+
+	return gulp.src(config.src)
 		.pipe(uglify())
 		.pipe(addsrc.prepend(config.header))
 		.pipe(concat(config.outputName))
