@@ -1,9 +1,9 @@
 Kera's Tagpro Scoreboard Userscript
 ====================
 
-Download: http://keratagpro.github.io/tagpro-scoreboard/tagpro-scoreboard.user.js
+Download: http://keratagpro.github.io/tagpro-ractive-scoreboard/tagpro-ractive-scoreboard.user.js
 
-Example: http://keratagpro.github.io/tagpro-scoreboard
+Example: http://keratagpro.github.io/tagpro-ractive-scoreboard
 
 ## Development
 
@@ -27,11 +27,10 @@ Example: http://keratagpro.github.io/tagpro-scoreboard
 
 ### Create the userscript file
 ```
-gulp dist
+gulp production
 ```
-This runs Browserify to get a `bundle.js`, uglifies it, adds a userscript header (`userscript-header.txt`) in front of it and copies it to `dist/tagpro-scoreboard.user.js`.
 
 ### Publish the example page
 ```
-gulp gh-pages
+gulp publish
 ```

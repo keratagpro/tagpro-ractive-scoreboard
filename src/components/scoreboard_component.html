@@ -48,13 +48,13 @@
 			<tr class="player-row">
 				<td class="player red">
 					{{#redPlayers:id}}
-						<p><Player /></p>
+						<p><Player data="{{.}}" options="{{options}}" /></p>
 					{{/redPlayers}}
 				</td>
 				<td class="separator"></td>
 				<td class="player blue">
 					{{#bluePlayers:id}}
-						<p><Player /></p>
+						<p><Player data="{{.}}" options="{{options}}" /></p>
 					{{/bluePlayers}}
 				</td>
 			</tr>

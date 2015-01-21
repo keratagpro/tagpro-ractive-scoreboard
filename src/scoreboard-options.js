@@ -1,5 +1,3 @@
-var tagpro = require('tagpro');
-
 var teamNames = tagpro.teamNames || {
 	redTeamName: 'Red',
 	blueTeamName: 'Blue'

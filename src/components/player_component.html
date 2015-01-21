@@ -1,26 +1,28 @@
-<span class="icons">
-	{{#if flag}}
-		<span class="sprite-tiles sprite-small" style="background-position: {{getFlag(flag)}};"></span>
+{{#with data}}
+	<span class="icons">
+		{{#if flag}}
+			<span class="sprite-tiles sprite-small" style="background-position: {{getFlag(flag)}};"></span>
+		{{/if}}
+		{{#if options.showPowerups}}
+			{{#if .grip}}
+				<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('grip')}};"></span>
+			{{/if}}
+			{{#if .bomb}}
+				<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('bomb')}};"></span>
+			{{/if}}
+			{{#if .tagpro}}
+				<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('tagpro')}};"></span>
+			{{/if}}
+		{{/if}}
+	</span>
+
+	{{#if options.showFlair}}
+		<span class="flair sprite-flair" style="background-position: {{getFlair(flair)}}"></span>
 	{{/if}}
-	{{#if options.showPowerups}}
-		{{#if grip}}
-			<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('grip')}};"></span>
-		{{/if}}
-		{{#if bomb}}
-			<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('bomb')}};"></span>
-		{{/if}}
-		{{#if tagpro}}
-			<span class="sprite-tiles sprite-small" style="background-position: {{getSprite('tagpro')}};"></span>
-		{{/if}}
+
+	<span class="name {{dead ? 'dead' : ''}} {{options.showAuth && auth ? 'auth' : ''}}" title="{{degree}}">{{name}}</span>
+
+	{{#if options.showDegree}}
+		<span class="degree">({{degree}}&deg;)</span>
 	{{/if}}
-</span>
-
-{{#if options.showFlair}}
-	<span class="flair sprite-flair" style="background-position: {{getFlair(flair)}}"></span>
-{{/if}}
-
-<span class="name {{dead ? 'dead' : ''}} {{options.showAuth && auth ? 'auth' : ''}}" title="{{degree}}">{{name}}</span>
-
-{{#if options.showDegree}}
-	<span class="degree">({{degree}}&deg;)</span>
-{{/if}}
+{{/with}}

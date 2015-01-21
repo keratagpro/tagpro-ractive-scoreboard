@@ -1,19 +1,19 @@
 {
-  "name": "gulp-starter",
-  "version": "0.1.1",
-  "description": "Gulp starter with common tasks and scenarios",
+  "name": "TagPro Ractive Scoreboard",
+  "version": "0.3.0",
+  "description": "TagPro Scoreboard, mostly for streamers.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/greypants/gulp-starter.git"
+    "url": "git://github.com/keratagpro/tagpro-ractive-scoreboard.git"
   },
   "browser": {
-    "ractive": "ractive/ractive.runtime.min",
     "jquery-ui/draggable": "./node_modules/jquery-ui/draggable.js",
     "jquery-ui/resizable": "./node_modules/jquery-ui/resizable.js"
   },
   "browserify-shim": {
     "jquery": "global:$",
-    "tagpro": "global:tagpro"
+    "tagpro": "global:tagpro",
+    "ractive": "global:Ractive"
   },
   "browserify": {
     "transform": [

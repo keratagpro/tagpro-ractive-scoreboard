@@ -3,11 +3,11 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var addsrc = require('gulp-add-src');
 var concat = require('gulp-concat');
-var config = require('../config').dist;
+var config = require('../config').production;
 
-gulp.task('dist', ['build'], function() {
+gulp.task('production', ['build'], function() {
 	gulp.src(config.header)
-		.pipe(rename(config.metaName))
+		.pipe(rename(config.outputMetaName))
 		.pipe(gulp.dest(config.dest));
 
 	return gulp.src(config.src)

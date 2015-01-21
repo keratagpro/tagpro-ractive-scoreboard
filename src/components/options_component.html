@@ -29,9 +29,9 @@
 
 			<fieldset>
 				<legend>Statistics</legend>
-				{{#statistics:key}}
+				{{#statsMap:key}}
 					<Checkbox label="{{label}}" value="{{.selected}}" />
-				{{/statistics}}
+				{{/statsMap}}
 			</fieldset>
 
 			<fieldset class="pure-form-stacked">
@@ -53,8 +53,8 @@
 				</div>
 			</fieldset>
 
-			<a href="#" on-click="saveOptions">Save Locally</a>
-			<a href="#" on-click="resetOptions">Reset</button>
+			<a href="#" on-click="saveOptions()">Save Locally</a>
+			<a href="#" on-click="resetOptions()">Reset</button>
 		</form>
 	</div>
 </div>

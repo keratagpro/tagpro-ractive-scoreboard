@@ -2,10 +2,11 @@ var path = require('path');
 
 var tempPath = 'tmp/src';
 var buildPath = 'build';
-var bundleName = 'bundle.js';
-var userscriptName = 'tagpro-scoreboard.user.js';
-var userscriptMetaName = 'tagpro-scoreboard.meta.js';
+var bundleName = 'tagpro-ractive-scoreboard.js';
+var userscriptName = 'tagpro-ractive-scoreboard.user.js';
+var userscriptMetaName = 'tagpro-ractive-scoreboard.meta.js';
 var entryPath = './' + tempPath + '/index.js';
+var headerPath = './src/scoreboard.header.js';
 
 module.exports = {
 	html: {
@@ -37,12 +38,12 @@ module.exports = {
 		src: [buildPath + '/**'],
 		baseDir: buildPath
 	},
-	dist: {
+	production: {
 		src: path.join(buildPath, bundleName),
-		header: './src/userscript-header.txt',
+		header: headerPath,
+		dest: buildPath,
 		outputName: userscriptName,
-		metaName: userscriptMetaName,
-		dest: buildPath
+		outputMetaName: userscriptMetaName
 	},
 	ghPages: {
 		src: buildPath

@@ -12,10 +12,19 @@
 <body>
 	<div id="output"></div>
 	<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-	<script src="bundle.js"></script>
+	<script src="//cdn.ractivejs.org/latest/ractive.min.js"></script>
+	<script src="tagpro-ractive.user.js"></script>
+	<script src="tagpro-ractive-scoreboard.js"></script>
+	
 	<script>
-		keraScoreboard.set('options.showScoreboard', true);
-		keraScoreboard.set('options.showOptions', false);
+		window.scoreboard = tagproRactive.findComponent('Scoreboard');
+		scoreboard.set('options.showScoreboard', true);
+		scoreboard.set('options.showOptions', false);
+
+		setInterval(function() {
+			tagpro.players[1]['s-hold'] = (tagpro.players[1]['s-hold'] || 0) + 1;
+			tagpro.players[2]['s-hold'] = (tagpro.players[2]['s-hold'] || 0) + 1;
+		}, 1000);
 	</script>
 </body>
 </html>

@@ -21,6 +21,8 @@
     "globalstrict": true,
     "globals": {
         "System": true,
-        "tagpro": true
+        "tagpro": true,
+        "Ractive": true,
+        "tagproRactive": true
     }
 }

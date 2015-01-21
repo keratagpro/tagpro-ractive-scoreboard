@@ -3,9 +3,11 @@ module.exports = function getChanges(prev, now) {
 	
 	for (prop in now) {
 		if (!prev || prev[prop] !== now[prop]) {
-			if (typeof now[prop] == "object") {
-				if(c = getChanges(prev[prop], now[prop]))
+			if (typeof now[prop] === 'object') {
+				var c = getChanges(prev[prop], now[prop]);
+				if(c) {
 					changes[prop] = c;
+				}
 			} else {
 				changes[prop] = now[prop];
 			}
