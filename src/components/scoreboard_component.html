@@ -1,10 +1,15 @@
-<div id="kera-scoreboard" style="background-color: {{options.backgroundColor}}; max-height: {{options.maxHeight}};" intro-outro="fly:{x:0,y:500}">
-	<div class="tools">
+<div id="kera-scoreboard" style="background-color: {{options.backgroundColor}}; font-size: {{options.fontSize}};" intro-outro="fly:{x:0,y:500}" decorator="movable">
+	<div class="tools tools-left">
+		<span class="resize-handle icon icon-resize-white"></span>
+		<span class="move-handle icon icon-move-white"></span>
+	</div>
+
+	<div class="tools tools-right">
 		<a href="#" class="settings" title="Settings" on-click="toggle('options.showOptions')">
-			<span class="icon icon-gear-white">&nbsp;</span>
+			<span class="icon icon-gear-white"></span>
 		</a>
 		<a href="#" class="close" title="Close Scoreboard" on-click="toggle('options.showScoreboard')">
-			<span class="icon icon-close-white">&nbsp;</span>
+			<span class="icon icon-close-white"></span>
 		</a>
 	</div>
 

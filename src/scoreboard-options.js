@@ -15,7 +15,7 @@ module.exports = {
 	showStatistics: true,
 	selectedStats: ['s-hold', 'score', 'powerupCount'],
 	backgroundColor: '#000',
-	maxHeight: '50%',
+	fontSize: '16px',
 	teamNames: {
 		red: teamNames.redTeamName,
 		blue: teamNames.blueTeamName

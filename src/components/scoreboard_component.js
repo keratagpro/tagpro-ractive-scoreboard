@@ -1,10 +1,9 @@
-var fs = require('fs');
 var Ractive = require('ractive');
 
 var ScoreboardComponent = Ractive.extend({
 	noCssTransform: true,
-	css: fs.readFileSync(__dirname + '/scoreboard_component.css', 'utf8'),
-	template: require('./scoreboard_component.ract'),
+	css: require('./scoreboard_component.tmp.css'),
+	template: require('./scoreboard_component.html'),
 	data: {
 		formatTime: function(sec) {
 			var hours = parseInt(sec / 3600, 10) % 24;

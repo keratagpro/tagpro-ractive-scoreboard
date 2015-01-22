@@ -25,8 +25,8 @@ function resetOptions() {
 
 var OptionsComponent = Ractive.extend({
 	noCssTransform: true,
-	css: fs.readFileSync(__dirname + '/options_component.css', 'utf8'),
-	template: require('./options_component.ract'),
+	css: require('./options_component.tmp.css'),
+	template: require('./options_component.html'),
 	components: {
 		'Textbox': require('./textbox_component'),
 		'Checkbox': require('./checkbox_component')

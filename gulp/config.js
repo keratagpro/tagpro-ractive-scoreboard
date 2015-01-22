@@ -1,51 +1,35 @@
 var path = require('path');
 
-var tempPath = 'tmp/src';
 var buildPath = 'build';
-var bundleName = 'tagpro-ractive-scoreboard.js';
-var userscriptName = 'tagpro-ractive-scoreboard.user.js';
-var userscriptMetaName = 'tagpro-ractive-scoreboard.meta.js';
-var entryPath = './' + tempPath + '/index.js';
-var headerPath = './src/scoreboard.header.js';
+var bundleName = 'tagpro-ractive-scoreboard.user.js';
+var metaName = 'tagpro-ractive-scoreboard.meta.js';
+var entryPath = './src/index.js';
+var headerPath = './src/header.js';
 
 module.exports = {
-	html: {
-		src: 'src/**/*.html',
-		dest: tempPath
-	},
-	scss: {
-		src: 'src/**/*.scss',
-		dest: tempPath
-	},
-	scripts: {
-		src: ['src/**/*.js'],
-		dest: tempPath
-	},
-	sprites: {
-		src: 'src/images/*.png',
-		dest: 'src'
-	},
-	example: {
-		src: 'example/**',
-		dest: buildPath
-	},
 	browserify: {
 		src: entryPath,
 		dest: buildPath,
+		header: headerPath,
 		outputName: bundleName
 	},
 	browserSync: {
 		src: [buildPath + '/**'],
 		baseDir: buildPath
 	},
-	production: {
-		src: path.join(buildPath, bundleName),
-		header: headerPath,
-		dest: buildPath,
-		outputName: userscriptName,
-		outputMetaName: userscriptMetaName
+	example: {
+		src: 'example/**',
+		dest: buildPath
 	},
-	ghPages: {
+	publish: {
 		src: buildPath
+	},
+	scss: {
+		src: 'src/**/*.scss',
+		dest: 'src'
+	},
+	sprites: {
+		src: 'src/images/*.png',
+		dest: 'src'
 	}
 };

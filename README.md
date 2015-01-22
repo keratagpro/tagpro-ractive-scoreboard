@@ -1,4 +1,4 @@
-Kera's Tagpro Scoreboard Userscript
+![TagPro Scoreboard](/src/images/score-green.png?raw=true) Kera's Tagpro Scoreboard Userscript
 ====================
 
 Download: http://keratagpro.github.io/tagpro-ractive-scoreboard/tagpro-ractive-scoreboard.user.js

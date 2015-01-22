@@ -1,38 +1,47 @@
 var browserify = require('browserify');
-var gulp = require('gulp');
-var handleErrors = require('../util/handleErrors');
-var util = require('gulp-util');
+var fs = require('fs');
+var transform = require('vinyl-transform');
 var watchify = require('watchify');
-var source = require('vinyl-source-stream');
+
+var gulp = require('gulp');
+var addSrc = require('gulp-add-src');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var util = require('gulp-util');
 
 var config = require('../config').browserify;
+var handleErrors = require('../util/handle-errors');
 
-gulp.task('browserify', ['ractive', 'scss', 'scripts'], function() {
-	var args = {};
-	if (global.isWatching) {
-		args = watchify.args; // cache, packageCache, fullPaths
-		args.debug = true;
-	}
-
-	var bundler = browserify(config.src, args);
+gulp.task('browserify', ['scss'], function() {
+	var options = {};
 
 	if (global.isWatching) {
-		bundler = watchify(bundler);
+		options = watchify.args;
+		options.debug = true;
 	}
 
-	function rebundle() {
-		return bundler
-			.bundle()
-			.on('error', handleErrors)
-			.pipe(source(config.outputName))
+	function bundle() {
+		return gulp.src(config.src)
+			.pipe(bundler(options))
+			.pipe(addSrc.prepend(config.header))
+			.pipe(concat(config.outputName))
 			.pipe(gulp.dest(config.dest));
 	}
 
+	var b = browserify(config.src, options);
+
 	if (global.isWatching) {
-		bundler
-			.on('log', util.log.bind(util, config.outputName + ':'))
-			.on('update', rebundle);
+		b = watchify(b);
+		b.on('log', util.log.bind(util, config.outputName + ':'));
+		b.on('update', bundle);
 	}
 
-	return rebundle();
+	function bundler(options) {
+		return transform(function(filename) {
+			return b.bundle()
+				.on('error', handleErrors);
+		});
+	}
+
+	return bundle();
 });

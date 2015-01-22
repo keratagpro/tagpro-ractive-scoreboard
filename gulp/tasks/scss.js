@@ -1,9 +1,11 @@
-var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var cached = require('gulp-cached');
-var sass = require('gulp-sass');
+var gulp = require('gulp');
 var minify = require('gulp-minify-css');
 var reload = require('browser-sync').reload;
+var rename = require('gulp-rename');
+var sass = require('gulp-sass');
+
 var config = require('../config').scss;
 
 gulp.task('scss', ['sprites'], function() {
@@ -16,6 +18,7 @@ gulp.task('scss', ['sprites'], function() {
 		})
 		.pipe(autoprefixer())
 		.pipe(minify())
+		.pipe(rename({ suffix: '.tmp' }))
 		.pipe(gulp.dest(config.dest))
 		.pipe(reload({ stream: true }));
 });

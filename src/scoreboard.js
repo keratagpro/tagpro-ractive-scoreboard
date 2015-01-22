@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 var defaultOptions = require('./scoreboard-options');
 var filter = require('./util/object/filter');
 var storage = require('./util/storage');
@@ -8,11 +6,11 @@ require('./util/ractive-transitions-fly');
 var helpers = require('./util/helpers');
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
-//Ractive.decorators.movable = require('./decorators/movable');
+Ractive.decorators.movable = require('./decorators/movable');
 
 var scoreboard = Ractive.extend({
 	debug: true,
-	template: require('./scoreboard.ract'),
+	template: require('./scoreboard.html'),
 	data: require('./scoreboard-data'),
 	computed: {
 		redPlayers: function() {
@@ -63,7 +61,7 @@ var scoreboard = Ractive.extend({
 
 		helpers.observePowerupCounts.call(this);
 		
-		helpers.injectGlobalCss(fs.readFileSync(__dirname + '/scoreboard.css', 'utf8'));
+		helpers.injectGlobalCss(require('./scoreboard.tmp.css'));
 
 		window.addEventListener('mousemove', this.get('mouseMoveHandler').bind(this));
 	}

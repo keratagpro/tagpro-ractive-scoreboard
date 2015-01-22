@@ -5,8 +5,8 @@
 // @author        Kera
 // @grant         GM_getValue
 // @grant         GM_setValue
-// @require       http://cdn.ractivejs.org/latest/ractive.min.js
-// @require       http://keratagpro.github.io/tagpro-ractive/tagpro-ractive.user.js
+// @require       https://cdn.ractivejs.org/latest/ractive.min.js
+// @require       https://keratagpro.github.io/tagpro-ractive/tagpro-ractive.user.js
 // @namespace     https://github.com/keratagpro
 // @icon          http://keratagpro.github.io/tagpro-ractive-scoreboard/images/score.png
 // @downloadUrl   https://keratagpro.github.io/tagpro-ractive-scoreboard/tagpro-ractive-scoreboard.user.js

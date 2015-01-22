@@ -24,7 +24,9 @@ window.tagpro = {
 				x: 0,
 				y: 0
 			},
-			flag: 2
+			flag: 2,
+			grip: true,
+			bomb: true
 		},
 		3: {
 			name: 'Some Ball 3',

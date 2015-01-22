@@ -1,5 +1,5 @@
 {
-  "name": "TagPro Ractive Scoreboard",
+  "name": "tagpro-ractive-scoreboard",
   "version": "0.3.0",
   "description": "TagPro Scoreboard, mostly for streamers.",
   "repository": {
@@ -10,25 +10,35 @@
     "jquery-ui/draggable": "./node_modules/jquery-ui/draggable.js",
     "jquery-ui/resizable": "./node_modules/jquery-ui/resizable.js"
   },
+  "browserify": {
+    "transform": [
+      [
+        "cssify",
+        {
+          "auto-inject": false
+        }
+      ],
+      "ractivate",
+      "brfs",
+      "browserify-shim"
+    ]
+  },
   "browserify-shim": {
     "jquery": "global:$",
     "tagpro": "global:tagpro",
     "ractive": "global:Ractive"
   },
-  "browserify": {
-    "transform": [
-      "brfs",
-      "browserify-shim"
-    ]
-  },
   "devDependencies": {
     "brfs": "^1.2.0",
     "browser-sync": "~1.9.0",
     "browserify": "^8.1.1",
+    "browserify-css": "^0.2.0",
     "browserify-shim": "^3.8.2",
     "css-sprite": "^0.9.0",
+    "cssify": "^0.6.0",
     "gh-pages": "^0.2.0",
     "git-config": "0.0.6",
+    "glob": "^4.3.5",
     "gulp": "~3.8.10",
     "gulp-add-src": "^0.2.0",
     "gulp-autoprefixer": "^2.1.0",
@@ -43,11 +53,12 @@
     "gulp-uglify": "^1.0.2",
     "gulp-util": "~3.0.2",
     "pretty-hrtime": "~1.0.0",
+    "ractivate": "^0.2.0",
     "vinyl-source-stream": "~1.0.0",
+    "vinyl-transform": "^1.0.0",
     "watchify": "~2.2.1"
   },
   "dependencies": {
-    "jquery-ui": "^1.10.5",
-    "ractive": "^0.6.1"
+    "jquery-ui": "^1.10.5"
   }
 }
