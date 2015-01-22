@@ -1,4 +1,4 @@
-<div id="kera-scoreboard-options" intro-outro="fly:{x:0,y:-500,opacity:1}" decorator="movable:document.body">
+<div id="kera-scoreboard-options" intro-outro="fly:{x:0,y:-500,opacity:1}">
 	<a href="#" class="close" title="Close Options" on-click="toggle('options.showOptions')">
 		<span class="icon icon-small icon-close"></span>
 	</a>
@@ -30,7 +30,7 @@
 			<fieldset>
 				<legend>Statistics</legend>
 				{{#statsMap:key}}
-					<Checkbox label="{{label}}" value="{{.selected}}" />
+					<Checkbox label="{{.label}}" value="{{.selected}}" />
 				{{/statsMap}}
 			</fieldset>
 
@@ -53,7 +53,7 @@
 				</div>
 			</fieldset>
 
-			<a href="#" on-click="saveOptions()">Save Locally</a>
+			<a href="#" on-click="storeOptions()">Save Locally</a>
 			<a href="#" on-click="resetOptions()">Reset</button>
 		</form>
 	</div>

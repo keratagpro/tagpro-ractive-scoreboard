@@ -1,9 +1,14 @@
+/* jshint ignore:start */
 function getItem(name) {
 	return GM_getValue(name);
-};
+}
 
 function setItem(name, value) {
 	GM_setValue(name, value);
+}
+
+function removeItem(name) {
+	GM_deleteValue(name);
 }
 
 function getJson(name) {
@@ -19,4 +24,5 @@ module.exports = {
 	setItem: setItem,
 	getJson: getJson,
 	setJson: setJson
-}
+};
+/* jshint ignore:end */

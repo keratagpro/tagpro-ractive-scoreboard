@@ -1,40 +1,3 @@
-// var playerDefaults = (function() {
-// 	var def = {
-// 		dead: false,
-// 		auth: false,
-// 		flag: null,
-// 		flair: null,
-// 		team: null,
-// 		name: 'Some Ball'
-// 	};
-
-// 	Object.keys(summables).forEach(function(key) {
-// 		def[key] = 0;
-// 	});
-
-// 	Object.keys(powerupCounts).forEach(function(key) {
-// 		def[key] = 0;
-// 		def[powerupCounts[key].id] = false;
-// 	});
-
-// 	def.powerups = 0;
-
-// 	return def;
-// })();
-
-// function addInitialValuesToPlayers(players) {
-// 	var playerKeys = Object.keys(tagpro.players);
-// 	var keys = Object.keys(playerDefaults);
-
-// 	playerKeys.forEach(function(key) {
-// 		var player = players[key];
-
-// 		keys.forEach(function(key) {
-// 			player[key] = player[key] || playerDefaults[key];
-// 		});
-// 	});
-// }
-
 var stats = require('./stats');
 
 function getSprite(sprite) {
@@ -70,20 +33,6 @@ function getPlayerStat(players, stat) {
 	return val;
 }
 
-function getTeamStats2(players) {
-	var val = 0;
-
-	var stat = 's-hold';
-	var map = {};
-	for (var key in players) {
-		var player = players[key];
-		val += player[stat] || 0;
-	}
-	map[stat] = val;
-
-	return map;
-}
-
 function getTeamStats(players) {
 	var all = Object.keys(stats.summables);
 	var powerups = Object.keys(stats.powerupCounts);
@@ -98,12 +47,12 @@ function getTeamStats(players) {
 				return sum;
 			}
 
-			console.log(this);
-			return sum + (players[id][stat] || 0);
-		}, 0);
+			var val = this.get('tagpro.players.' + id + '.' + stat);
+			return sum + (val || 0);
+		}.bind(this), 0);
 	}.bind(this));
 
-	map.powerups = powerups.reduce(function(sum, key) {
+	map.powerupCount = powerups.reduce(function(sum, key) {
 		return sum + map[key];
 	}, 0);
 
@@ -117,25 +66,9 @@ function injectGlobalCss(css) {
 	document.head.appendChild(style);	
 }
 
-function selectedStatistics() {
-	var stats = this.get('statistics');
-
-	var key;
-	var map = {};
-
-	for (key in stats) {
-		if (stats[key].selected) {
-			map[key] = stats[key];
-		}
-	}
-
-	return map;
-}
-
 module.exports = {
 	getSprite: getSprite,
 	observePowerupCounts: observePowerupCounts,
 	getTeamStats: getTeamStats,
-	injectGlobalCss: injectGlobalCss,
-	selectedStatistics: selectedStatistics
+	injectGlobalCss: injectGlobalCss
 };

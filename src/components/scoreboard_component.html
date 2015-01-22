@@ -62,17 +62,17 @@
 		</tbody>
 	</table>
 
-	{{#if options.showStatistics}}
+	{{#if options.showStatistics && selectedStatsMap}}
 	<h3>Team Statistics</h3>
 	<table class="team-statistics">
 		<tbody>
-			{{#selectedStatistics:key}}
+			{{#selectedStatsMap:key}}
 				<tr class="{{key}}">
 					<td class="label">{{label}}</td>
 					<td class="red">{{time ? formatTime(redTeamStats[key]) : redTeamStats[key]}}</td>
 					<td class="blue">{{time ? formatTime(blueTeamStats[key]) : blueTeamStats[key]}}</td>
 				</tr>
-			{{/selectedStatistics}}
+			{{/selectedStatsMap}}
 		</tbody>
 	</table>
 	{{/if}}

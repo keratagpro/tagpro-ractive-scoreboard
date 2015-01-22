@@ -21,7 +21,7 @@ var powerupCounts = {
 };
 
 var all = $.extend(true, {}, summables, powerupCounts, {
-	powerupCount: { label: 'powerups' }
+	powerupCount: { label: 'Powerups' }
 });
 
 module.exports = {

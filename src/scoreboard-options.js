@@ -13,7 +13,7 @@ module.exports = {
 	showPowerups: true,
 	showAuth: true,
 	showStatistics: true,
-	selectedStatisticsKeys: ['s-hold', 'score', 'powerups'],
+	selectedStats: ['s-hold', 'score', 'powerupCount'],
 	backgroundColor: '#000',
 	maxHeight: '50%',
 	teamNames: {

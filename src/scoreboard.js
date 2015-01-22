@@ -5,12 +5,7 @@ var filter = require('./util/object/filter');
 var storage = require('./util/storage');
 require('./util/ractive-transitions-fly');
 
-var helpers = require('./scoreboard-helpers');
-var forceRactiveMagicMode = helpers.forceRactiveMagicMode;
-var getPlayersByTeam = helpers.getPlayersByTeam;
-var getTeamStats = helpers.getTeamStats;
-var injectGlobalCss = helpers.injectGlobalCss;
-var selectedStatistics = helpers.selectedStatistics;
+var helpers = require('./util/helpers');
 
 // Ractive.defaults.noCssTransform = true; // TODO: Doesn't seem to work?
 //Ractive.decorators.movable = require('./decorators/movable');
@@ -28,12 +23,26 @@ var scoreboard = Ractive.extend({
 		},
 		redTeamStats: function() {
 			var players = this.get('redPlayers');
-			return getTeamStats.call(this, players);
+			return helpers.getTeamStats.call(this, players);
 		},
 		blueTeamStats: function() {
-			return getTeamStats.call(this, this.get('bluePlayers'));
+			return helpers.getTeamStats.call(this, this.get('bluePlayers'));
 		},
-		selectedStatistics: selectedStatistics
+		selectedStatsMap: function() {
+			return filter(this.get('statsMap'), function(stat) {
+				return stat.selected;
+			});
+		},
+		'options.selectedStats': {
+			get: function() {
+				return Object.keys(this.get('selectedStatsMap'));
+			},
+			set: function(keys) {
+				keys.forEach(function(stat) {
+					this.set('statsMap.' + stat + '.selected', true);
+				}.bind(this));
+			}
+		}
 	},
 	components: {
 		'Options': require('./components/options_component'),
@@ -50,13 +59,13 @@ var scoreboard = Ractive.extend({
 	onrender: function() {
 		this.loadOptions();
 
-		window.addEventListener('mousemove', this.get('mouseMoveHandler').bind(this));
+		this.on('Options.resetOptions', this.loadOptions);
 
 		helpers.observePowerupCounts.call(this);
+		
+		helpers.injectGlobalCss(fs.readFileSync(__dirname + '/scoreboard.css', 'utf8'));
 
-		//forceRactiveMagicMode(this);
-
-		injectGlobalCss(fs.readFileSync(__dirname + '/scoreboard.css', 'utf8'));
+		window.addEventListener('mousemove', this.get('mouseMoveHandler').bind(this));
 	}
 });
 

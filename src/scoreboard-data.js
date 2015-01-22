@@ -2,7 +2,7 @@ var helpers = require('./util/helpers');
 var storage = require('./util/storage');
 
 var opts = require('./scoreboard-options');
-var stats = require('./stats');
+var stats = require('./util/stats');
 
 var mouseMoveTimeout;
 module.exports = {

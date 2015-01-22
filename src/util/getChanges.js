@@ -3,7 +3,12 @@ module.exports = function getChanges(prev, now) {
 	
 	for (prop in now) {
 		if (!prev || prev[prop] !== now[prop]) {
-			if (typeof now[prop] === 'object') {
+			if (Array.isArray(prev[prop]) && Array.isArray(now[prop])) {
+				if (prev[prop].join(',') !== now[prop].join(',')) {
+					changes[prop] = now[prop];
+				}
+			}
+			else if (typeof now[prop] === 'object') {
 				var c = getChanges(prev[prop], now[prop]);
 				if(c) {
 					changes[prop] = c;

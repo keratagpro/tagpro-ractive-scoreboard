@@ -5,27 +5,10 @@ var getChanges = require('../util/getChanges');
 var storage = require('../util/storage');
 var defaultOptions = require('../scoreboard-options');
 
-function loadOptions() {
-	this.set('options', $.extend(true, {}, defaultOptions, storage.getJson('options')));
-}
-
-function saveOptions() {
-	var stats = this.get('statsMap');
-
-	var selectedStats = [], key;
-
-	for (key in stats) {
-		if (stats[key].selected) {
-			selectedStats.push(key);
-		}
-	}
-
+function storeOptions() {
 	var options = this.get('options');
-	var changed = getChanges(defaultOptions, options) || null;
 
-	if (defaultOptions.selectedStatisticsKeys.join(',') !== selectedStats.join(',')) {
-		changed.selectedStatisticsKeys = selectedStats;
-	}
+	var changed = getChanges(defaultOptions, options) || null;
 
 	if (changed && changed.showOptions) {
 		delete changed.showOptions; // Don't store the Options window setting
@@ -36,8 +19,8 @@ function saveOptions() {
 }
 
 function resetOptions() {
-	storage.setItem('options', null);
-	this.loadOptions();
+	storage.removeItem('options');
+	this.fire('resetOptions');
 }
 
 var OptionsComponent = Ractive.extend({
@@ -48,8 +31,7 @@ var OptionsComponent = Ractive.extend({
 		'Textbox': require('./textbox_component'),
 		'Checkbox': require('./checkbox_component')
 	},
-	loadOptions: loadOptions,
-	saveOptions: saveOptions,
+	storeOptions: storeOptions,
 	resetOptions: resetOptions
 });
 
